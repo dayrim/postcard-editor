@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'assets/global.scss';
 import { App } from 'features';
 import { Provider } from "react-redux";
+import { ThemeProvider } from 'react-jss'
 import configureStore from "store";
 
+import { theme } from "./assets/theme";
 import reportWebVitals from './reportWebVitals';
 
+import 'assets/global.scss';
 
 const bootstrap = async () => {
   const store = configureStore()
@@ -14,7 +16,9 @@ const bootstrap = async () => {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
       </Provider>,
     </React.StrictMode>,
     document.getElementById('root')

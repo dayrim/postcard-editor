@@ -1,5 +1,5 @@
 declare module "Models" {
-  export interface AppState {
+  export type AppState = {
     readonly ready: boolean;
-  }
+  };
 }
