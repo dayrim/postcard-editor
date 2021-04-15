@@ -1,8 +1,9 @@
 import { createReducer } from "typesafe-actions";
 import { RootActions, ImagesState, TextBlocksState } from "Models";
 import { combineReducers } from "redux";
+import { cloneDeep } from "lodash";
 
-import { createTextBlock } from "./actions";
+import { createTextBlock, moveTextBlock } from "./actions";
 
 const imagesInitialState = {
   currentImage: "",
@@ -17,9 +18,22 @@ const blocksInitialState = {
 
 const textBlocks = createReducer<TextBlocksState, RootActions>(
   blocksInitialState
-).handleAction(createTextBlock, (state, action) => {
-  return { textBlocks: [...state.textBlocks, action.payload] };
-});
+)
+  .handleAction(createTextBlock, (state, action) => {
+    return { ...state, textBlocks: [...state.textBlocks, action.payload] };
+  })
+  .handleAction(moveTextBlock, (state, { payload: { id, left, top } }) => {
+    const textBlocks = cloneDeep(state.textBlocks);
+    const blockIndex = state.textBlocks.findIndex(
+      ({ id: blockId }) => blockId === id
+    );
+    textBlocks[blockIndex] = {
+      ...textBlocks[blockIndex],
+      left,
+      top,
+    };
+    return { ...state, textBlocks };
+  });
 
 const reducer = combineReducers({ images, textBlocks });
 

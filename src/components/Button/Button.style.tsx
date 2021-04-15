@@ -12,10 +12,9 @@ export default createUseStyles((theme) => ({
         color: theme.colors.primaryContrast,
         border: "1px solid transparent",
         "&:hover": {
-            background: theme.colors.primaryContrast,
-            color: theme.colors.primary,
+            background: theme.colors.primaryComplimentary,
+            color: theme.colors.primaryContrast,
             cursor: "pointer",
-            border: `1px solid ${theme.colors.primary}`
         },
         "&:focus": {
             outline: `1px solid ${theme.colors.primary}`

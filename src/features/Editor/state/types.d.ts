@@ -8,8 +8,8 @@ declare module "Models" {
   };
   export type TextBlock = {
     readonly id: string;
-    readonly xPosition: number;
-    readonly yPosition: number;
+    readonly left: number;
+    readonly top: number;
     readonly text: string;
   };
 }

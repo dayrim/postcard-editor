@@ -4,6 +4,8 @@ import { App } from 'features';
 import { Provider } from "react-redux";
 import { ThemeProvider } from 'react-jss'
 import configureStore from "store";
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 import { theme } from "./assets/theme";
 import reportWebVitals from './reportWebVitals';
@@ -17,7 +19,9 @@ const bootstrap = async () => {
     <React.StrictMode>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <App />
+          <DndProvider backend={HTML5Backend}>
+            <App />
+          </DndProvider>
         </ThemeProvider>
       </Provider>,
     </React.StrictMode>,

@@ -1,13 +1,27 @@
 import { createUseStyles } from 'react-jss'
 
-export default createUseStyles((theme) => ({
-    textBlock: {
-        fontSize: "24px",
-        fontWeight: 700,
-        border: "1px solid transparent",
-        "&:hover": {
-            cursor: "pointer",
-            border: `1px solid ${theme.colors.primary}`
-        },
-    }
-}))
+interface PropTypes {
+    left: number,
+    top: number,
+    isDragging: boolean,
+}
+
+export default createUseStyles<string, PropTypes>((theme) => {
+
+    return (({
+        textBlock: {
+            fontSize: "72px",
+            fontWeight: 700,
+            border: "1px solid transparent",
+            "&:hover": {
+                cursor: "pointer",
+                border: `1px solid ${theme.colors.primary}`
+            },
+            position: 'absolute',
+            transform: ({ left, top }) => `translate3d(${left}px, ${top}px, 0)`,
+            WebkitTransform: ({ left, top }) => `translate3d(${left}px, ${top}px, 0)`,
+            opacity: ({ isDragging }) => isDragging ? 0 : 1,
+            height: ({ isDragging }) => isDragging ? 0 : '',
+        }
+    }))
+})

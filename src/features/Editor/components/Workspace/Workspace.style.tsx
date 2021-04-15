@@ -6,7 +6,7 @@ export default createUseStyles<string, PropTypes>(() => ({
     workspace: {
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
     },
     postcard: {
         width: "400px",
