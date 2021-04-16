@@ -11,7 +11,8 @@ export default createUseStyles<string, PropTypes>(() => ({
     postcard: {
         width: "400px",
         height: "600px",
-        position: "relative"
+        position: "relative",
+        overflow: "hidden"
     },
     image: {
         width: "100%",

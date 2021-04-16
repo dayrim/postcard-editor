@@ -1,41 +1,41 @@
 import React from 'react'
 import clsx from "clsx";
-import { useSelector } from 'react-redux';
-import { getTextBlocks } from "store";
+import { useSelector, useDispatch } from 'react-redux';
+import { getTextBlocks, moveTextBlock } from "store";
 import { TextBlock } from "features/Editor/components";
 import { useDrop } from 'react-dnd'
+import { TextBlock as TextBlockType } from "Models";
+import { DragItemTypes } from 'enums';
 
 import useStyles from "./Workspace.style";
 
 const Workspace = ({ className }: { className?: string }) => {
-
+    const dispatch = useDispatch()
     const classes = useStyles({
         postcardBackground: `https://source.unsplash.com/800x800/?nature&sig=1`
     })
 
     const { textBlocks } = useSelector(getTextBlocks)
-    // const [, drop] = useDrop(
-    //     () => ({
-    //         accept: ItemTypes.BOX,
-    //         drop(item: DragItem, monitor) {
-    //             const delta = monitor.getDifferenceFromInitialOffset() as {
-    //                 x: number
-    //                 y: number
-    //             }
+    const [, drop] = useDrop(
+        () => ({
+            accept: DragItemTypes.TextBlocks,
+            drop(textBlock: TextBlockType, monitor) {
+                const delta = monitor.getDifferenceFromInitialOffset() as {
+                    x: number
+                    y: number
+                }
 
-    //             let left = Math.round(item.left + delta.x)
-    //             let top = Math.round(item.top + delta.y)
+                let left = Math.round(textBlock.left + delta.x)
+                let top = Math.round(textBlock.top + delta.y)
 
-    //             moveBox(item.id, left, top)
-    //             return undefined
-    //         },
-    //     }),
-    //     [moveBox],
-    // )
+                dispatch(moveTextBlock({ id: textBlock.id, left, top }))
+
+            },
+        }),
+    )
     return (
         <div className={clsx(classes.workspace, className)}>
-
-            <div className={classes.postcard}>
+            <div className={classes.postcard} ref={drop}>
                 <div className={classes.background}></div>
 
                 {textBlocks.map(({ id, text, left, top }) =>
