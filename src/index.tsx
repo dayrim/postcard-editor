@@ -7,6 +7,7 @@ import configureStore from "store";
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
+
 import { theme } from "./assets/theme";
 import reportWebVitals from './reportWebVitals';
 
@@ -14,6 +15,7 @@ import 'assets/global.scss';
 
 const bootstrap = async () => {
   const store = configureStore()
+
 
   ReactDOM.render(
     <React.StrictMode>

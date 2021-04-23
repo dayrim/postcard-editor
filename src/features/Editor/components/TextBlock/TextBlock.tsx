@@ -9,25 +9,25 @@ interface PropTypes {
     text: string,
     id: string,
     left: number,
-    top: number
+    top: number,
+    color: string
 }
-const TextBlock = ({ id, text, left, top }: PropTypes) => {
+const TextBlock = ({ id, text, left, top, color }: PropTypes) => {
 
     const [{ isDragging }, drag, preview] = useDrag(
         () => ({
             type: DragItemTypes.TextBlocks,
-            item: { id, left, top, text },
+            item: { id, left, top, text, color },
             collect: (monitor: DragSourceMonitor) => ({
                 isDragging: monitor.isDragging(),
             }),
         }),
-        [id, left, top, text],
+        [id, left, top, text, color],
     )
-    const classes = useStyles({ isDragging, top, left })
+    const classes = useStyles({ isDragging, top, left, color })
     useEffect(() => {
         preview(getEmptyImage(), { captureDraggingState: true })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [preview])
     return (
         <div className={classes.textBlock} ref={drag}>
             {text}

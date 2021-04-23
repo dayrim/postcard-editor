@@ -1,26 +1,47 @@
 import { createReducer } from "typesafe-actions";
-import { RootActions, ImagesState, TextBlocksState } from "Models";
+import { PostcardState, RootActions, SliderState } from "Models";
 import { combineReducers } from "redux";
 import { cloneDeep } from "lodash";
+import cuid from "cuid";
 
-import { createTextBlock, moveTextBlock } from "./actions";
+import {
+  createTextBlock,
+  moveTextBlock,
+  initSlider,
+  initPostcard,
+  updatePostcardImage,
+} from "./actions";
+
+/* Slider */
 
 const imagesInitialState = {
-  currentImage: "",
   images: [],
 };
 
-const images = createReducer<ImagesState, RootActions>(imagesInitialState);
+const slider = createReducer<SliderState, RootActions>(
+  imagesInitialState
+).handleAction(initSlider.success, (state, action) => {
+  return { ...state, ...action.payload };
+});
 
-const blocksInitialState = {
-  textBlocks: [],
-};
+/* Text blocks */
+const postcardInitialState = { textBlocks: [] };
 
-const textBlocks = createReducer<TextBlocksState, RootActions>(
-  blocksInitialState
-)
-  .handleAction(createTextBlock, (state, action) => {
-    return { ...state, textBlocks: [...state.textBlocks, action.payload] };
+const postcard = createReducer<PostcardState, RootActions>(postcardInitialState)
+  .handleAction(initPostcard.success, (state, action) => {
+    return { ...state, ...action.payload };
+  })
+  .handleAction(createTextBlock.success, (state, action) => {
+    return { ...state, textBlocks: action.payload };
+  })
+  .handleAction(updatePostcardImage.request, (state, { payload }) => {
+    return { ...state, loading: true };
+  })
+  .handleAction(updatePostcardImage.failure, (state, { payload }) => {
+    return { ...state, loading: false };
+  })
+  .handleAction(updatePostcardImage.success, (state, { payload }) => {
+    return { ...state, image: payload, loading: false };
   })
   .handleAction(moveTextBlock, (state, { payload: { id, left, top } }) => {
     const textBlocks = cloneDeep(state.textBlocks);
@@ -35,6 +56,6 @@ const textBlocks = createReducer<TextBlocksState, RootActions>(
     return { ...state, textBlocks };
   });
 
-const reducer = combineReducers({ images, textBlocks });
+const reducer = combineReducers({ slider, postcard });
 
 export default reducer;

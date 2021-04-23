@@ -1,14 +1,17 @@
 import React, { MouseEventHandler } from 'react'
+import clsx from "clsx";
 
 import useStyles from "./Button.style";
 
-interface PropTypes { name: string, onClick?: MouseEventHandler }
+interface PropTypes { name?: string, onClick?: MouseEventHandler, icon?: JSX.Element, className?: string }
 
-const Button = ({ name = "Button", onClick = () => { } }: PropTypes) => {
+const Button = ({ name = "", onClick = () => { }, icon, className }: PropTypes) => {
     const classes = useStyles()
 
     return (
-        <button className={classes.button} onClick={onClick}>
+        <button className={clsx(className, classes.button)} onClick={onClick}>
+            <div className={classes.icon}>     {icon}</div>
+
             {name}
         </button>
     )

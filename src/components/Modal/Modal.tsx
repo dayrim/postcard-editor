@@ -13,7 +13,6 @@ const Modal = ({ children, isOpen, className }: PropTypes) => {
     const classes = useStyles({ isOpen })
     const modalRoot = document.getElementById('modal');
     const backdropRoot = document.getElementById('backdrop');
-    console.log(className, 'className')
     return <>
         {createPortal(<div className={classes.backdrop} />, backdropRoot!)}
         {createPortal(<div className={clsx(className, classes.modal)}>{children}</div>, modalRoot!)}

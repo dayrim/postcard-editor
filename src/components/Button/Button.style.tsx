@@ -6,6 +6,7 @@ export default createUseStyles((theme) => ({
         width: "180px",
         height: "45px",
         margin: "10px",
+        transition: theme.animation.default,
         borderWidth: "0px",
         fontSize: "16px",
         fontWeight: 700,
@@ -19,5 +20,6 @@ export default createUseStyles((theme) => ({
         "&:focus": {
             outline: `1px solid ${theme.colors.primary}`
         }
-    }
+    },
+    icon: {}
 }))

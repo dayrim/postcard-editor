@@ -7,9 +7,7 @@ declare module "Models" {
 
   export type RootActions = ActionType<typeof import("./root-actions")>;
 
-  export type RootState = StateType<
-    ReturnType<typeof import("./root-reducer").default>
-  >;
+  export type RootState = StateType<typeof import("./root-reducer").default>;
 
-  export type RootEpic = Epic<RootAction, RootAction, RootState>;
+  export type RootEpic = Epic<RootAction, RootAction, RootState, Services>;
 }

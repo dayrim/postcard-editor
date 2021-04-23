@@ -4,6 +4,7 @@ interface PropTypes {
     left: number,
     top: number,
     isDragging: boolean,
+    color: string
 }
 
 export default createUseStyles<string, PropTypes>((theme) =>
@@ -21,5 +22,6 @@ export default createUseStyles<string, PropTypes>((theme) =>
         WebkitTransform: ({ left, top }) => `translate3d(${left}px, ${top}px, 0)`,
         opacity: ({ isDragging }) => isDragging ? 0 : 1,
         height: ({ isDragging }) => isDragging ? 0 : '',
+        color: ({ color }) => color
     }
 }))

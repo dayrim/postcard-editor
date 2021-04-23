@@ -9,24 +9,5 @@ export default createUseStyles((theme) => ({
         flexDirection: "column",
         alignItems: "center"
     },
-    button: {
 
-    },
-    createTextDialog: {
-        display: "flex",
-        flexDirection: "column",
-        "& h4": {
-            textAlign: "left"
-        }
-    },
-    dialogActions: {
-        display: "flex",
-        marginTop: "20px",
-        "&  >*": {
-            margin: 0,
-            "&:not(:last-child)": {
-                marginRight: "20px",
-            },
-        },
-    }
 }))

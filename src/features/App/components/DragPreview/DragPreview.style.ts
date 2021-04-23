@@ -1,8 +1,8 @@
 import { createUseStyles } from "react-jss";
-import { XYCoord } from "react-dnd";
 
 interface PropTypes {
-  currentOffset: XYCoord | null;
+  transform: string | null;
+  itemColor: string | null;
 }
 
 export default createUseStyles<string, PropTypes>((theme) => {
@@ -17,11 +17,9 @@ export default createUseStyles<string, PropTypes>((theme) => {
       height: "100%",
     },
     item: {
-      display: ({ currentOffset }) => (!currentOffset ? `none` : "block"),
-      transform: ({ currentOffset }) =>
-        `translate(${currentOffset?.x || 0}px, ${currentOffset?.y || 0}px)`,
-      WebkitTransform: ({ currentOffset }) =>
-        `translate(${currentOffset?.x || 0}px, ${currentOffset?.y || 0}px)`,
+      display: ({ transform }) => (!transform ? `none` : "block"),
+      transform: ({ transform }) => transform,
+      WebkitTransform: ({ transform }) => transform,
     },
     textBlockPreview: {
       fontSize: "72px",
@@ -31,6 +29,7 @@ export default createUseStyles<string, PropTypes>((theme) => {
         cursor: "pointer",
         border: `1px solid ${theme.colors.primary}`,
       },
+      color: ({ itemColor }) => itemColor,
     },
   };
 });

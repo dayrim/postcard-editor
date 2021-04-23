@@ -12,16 +12,20 @@ export default createUseStyles<string, PropTypes>(() => ({
         width: "400px",
         height: "600px",
         position: "relative",
-        overflow: "hidden"
+        overflow: "hidden",
     },
     image: {
         width: "100%",
         height: "100%",
-        objectFit: "cover"
+        objectFit: "cover",
+        objectPosition: "50% 50%"
     },
     background: {
-        background: ({ postcardBackground }) => `url(${postcardBackground})`,
+        backgroundSize: "cover",
+        backgroundPosition: "50% 50%",
+        backgroundImage: ({ postcardBackground }) => `url(${postcardBackground})`,
         position: "absolute",
+
         width: "100%",
         height: "100%",
         zIndex: "-1",
