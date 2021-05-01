@@ -76,6 +76,7 @@ export const updatePostcardImage: RootEpic = (
       return actions.updatePostcardImage.success(payload);
     })
   );
+
 export const createTextBlock: RootEpic = (action$, state$, { localStorage }) =>
   action$.pipe(
     filter(isActionOf(actions.createTextBlock.request)),

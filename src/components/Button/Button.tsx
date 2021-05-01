@@ -3,9 +3,18 @@ import clsx from "clsx";
 
 import useStyles from "./Button.style";
 
-interface PropTypes { name?: string, onClick?: MouseEventHandler, icon?: JSX.Element, className?: string }
+interface PropTypes {
+    name?: string,
+    onClick?: MouseEventHandler,
+    icon?: JSX.Element,
+    className?: string
+}
 
-const Button = ({ name = "", onClick = () => { }, icon, className }: PropTypes) => {
+const Button = ({
+    name = "",
+    onClick = () => { },
+    icon,
+    className }: PropTypes) => {
     const classes = useStyles()
 
     return (
